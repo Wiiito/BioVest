@@ -86,11 +86,11 @@
     --popover-foreground: #22014D;
     --primary: #22014D;
     --primary-foreground: #94FE70;
-    --secondary: oklch(0.97 0 0);
+    --secondary: #00A651;
     --secondary-foreground: #22014D;
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
+    --muted: #00A651;
+    --muted-foreground: #8DC63F;
+    --accent: #00A651;
     --accent-foreground: #22014D;
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
@@ -107,7 +107,7 @@
     --sidebar-foreground: #22014D;
     --sidebar-primary: #22014D;
     --sidebar-primary-foreground: #94FE70;
-    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent: #00A651;
     --sidebar-accent-foreground: #22014D;
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.87 0 0);
@@ -124,8 +124,8 @@
     --primary-foreground: #22014D;
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: #94FE70;
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
+    --muted: #00A651;
+    --muted-foreground: #8DC63F;
     --accent: oklch(0.269 0 0);
     --accent-foreground: #94FE70;
     --destructive: oklch(0.396 0.141 25.723);
@@ -155,5 +155,8 @@
 
     body {
         @apply bg-background text-foreground;
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
     }
 }
