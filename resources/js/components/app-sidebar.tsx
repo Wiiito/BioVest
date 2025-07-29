@@ -1,60 +1,53 @@
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BotIcon, GamepadIcon, LayoutGrid, MessageCircleQuestionIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Home',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: 'home',
     },
     {
         title: 'Enem',
         href: '/questions',
-        icon: MessageCircleQuestionIcon,
+        icon: 'book',
     },
     {
-        title: 'Chatbot',
+        title: 'Chat bot',
         href: '/chatbot',
-        icon: BotIcon
+        icon: 'robot',
     },
     {
         title: 'Jogo',
         href: '/game',
-        icon: GamepadIcon
-    }
+        icon: 'game',
+    },
 ];
 
 const footerNavItems: NavItem[] = [];
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <div className="relative m-5 flex h-[calc(svh-1.25rem)] w-(--sidebar-width) flex-col rounded-[58px] bg-sidebar py-5 transition-[width] duration-200 ease-linear">
             <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
-                                <AppLogo />
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
+                <SidebarMenu className="px-5">
+                    <Link href="/profile" className="text-primary-foreground" prefetch>
+                        Mascote
+                    </Link>
+                    <Link href="/dashboard" className="text-primary-foreground" prefetch>
+                        <AppLogo />
+                    </Link>
                 </SidebarMenu>
             </SidebarHeader>
 
-            <SidebarContent>
-                <NavMain items={mainNavItems} />
+            <SidebarContent className="flex h-full flex-col justify-between px-5">
+                <NavMain className={'h-full'} items={mainNavItems} />
             </SidebarContent>
-
-            <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
-            </SidebarFooter>
-        </Sidebar>
+            <hr />
+            <SidebarFooter className="bg-white px-5">TEMA CLARO TEMA ESCuro</SidebarFooter>
+        </div>
     );
 }
