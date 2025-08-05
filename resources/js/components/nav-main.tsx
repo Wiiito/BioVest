@@ -10,7 +10,11 @@ export function NavMain({ items = [], className }: { items: NavItem[]; className
             <SidebarMenu className="h-full justify-center gap-5">
                 {items.map((item) => (
                     <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={page.url.startsWith(item.href)} className="min-h-14 text-xl text-white">
+                        <SidebarMenuButton
+                            asChild
+                            isActive={page.url.startsWith(item.href)}
+                            className="min-h-14 font-[Bree_Serif] text-xl text-white dark:text-primary-foreground"
+                        >
                             <Link href={item.href} prefetch>
                                 <img src={`/images/sidebar-icons/${item.icon}.png`} className="h-full" alt={item.title} />
                                 <span>{item.title}</span>
