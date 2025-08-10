@@ -35,14 +35,12 @@ export function AppSidebar() {
     return (
         <div className="relative m-5 flex h-[calc(svh-1.25rem)] w-(--sidebar-width) flex-col rounded-[58px] bg-sidebar py-5 transition-[width] duration-200 ease-linear">
             <SidebarHeader>
-                <SidebarMenu className="px-5">
-                    <Link href="/profile" className="text-primary-foreground" prefetch>
+                <Link href="/profile" className="text-primary-foreground" prefetch>
+                    <SidebarMenu className="px-5">
                         Mascote
-                    </Link>
-                    <Link href="/dashboard" className="text-primary-foreground" prefetch>
                         <AppLogo />
-                    </Link>
-                </SidebarMenu>
+                    </SidebarMenu>
+                </Link>
             </SidebarHeader>
 
             <SidebarContent className="flex h-full flex-col justify-between px-5">
