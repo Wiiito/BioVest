@@ -22,6 +22,7 @@ return new class extends Migration
             $table->id('id');
             $table->text('statement');
             $table->text('image_path')->nullable();
+            $table->string('year', 4);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('question_category')->onDelete('cascade');
             $table->timestamps();
@@ -29,6 +30,7 @@ return new class extends Migration
 
         Schema::create('answer', function (Blueprint $table) {
             $table->id('id');
+            $table->string('text');
             $table->unsignedBigInteger('question_id');
             $table->foreign('question_id')->references('id')->on('question')->onDelete('cascade');
             $table->boolean('is_correct');

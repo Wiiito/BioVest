@@ -66,6 +66,20 @@ services:
     ports:
       - "6379:6379"
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    container_name: dockerized-laravel-phpmyadmin
+    restart: always
+    networks:
+      - dockerized-laravel-network
+    environment:
+      PHM_HOST: mysql
+      MYSQL_ROOT_PASSWORD: senha123
+    ports:
+      - "9000:80"
+
 # Networks
 networks:
   dockerized-laravel-network:
