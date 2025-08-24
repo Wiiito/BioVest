@@ -110,7 +110,8 @@
     --sidebar-accent: #00A651;
     --sidebar-accent-foreground: #22014D;
     --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+    --sidebar-ring: #ffffff;
+    --permanent-dark: #22014D;
 }
 
 .dark {
@@ -145,7 +146,8 @@
     --sidebar-accent: oklch(0.269 0 0);
     --sidebar-accent-foreground: #94FE70;
     --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+    --sidebar-ring: #22014D;
+    --permanent-dark: #22014D;
 }
 
 @layer base {
