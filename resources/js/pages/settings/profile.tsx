@@ -1,102 +1,63 @@
 import { type SharedData } from '@/types';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
-import InputError from '@/components/input-error';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import SinglePageNoScrollLayout from '@/components/layout/SinglePageNoScrollLayout';
+import Avatar from '@/components/ui/avatar';
+import ChangeProfileModal from './changeProfile';
 
-type ProfileForm = {
-    name: string;
-    email: string;
-};
+export default function Profile({ accountIcons }: { accountIcons: string[] }) {
+    const [showChangeAvatarModal, setShowChangeAvatarModal] = useState<boolean>(false);
 
-export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth } = usePage<SharedData>().props;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
-        name: auth.user.name,
-        email: auth.user.email,
-    });
-
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
-        patch(route('profile.update'), {
-            preserveScroll: true,
-        });
-    };
-
     return (
-        <form onSubmit={submit} className="space-y-6">
-            <div className="grid gap-2">
-                <Label htmlFor="name">Nome</Label>
-
-                <Input
-                    id="name"
-                    className="mt-1 block w-full"
-                    value={data.name}
-                    onChange={(e) => setData('name', e.target.value)}
-                    required
-                    autoComplete="name"
-                    placeholder="Nome completo"
-                />
-
-                <InputError className="mt-2" message={errors.name} />
-            </div>
-
-            <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-
-                <Input
-                    id="email"
-                    type="email"
-                    className="mt-1 block w-full"
-                    value={data.email}
-                    onChange={(e) => setData('email', e.target.value)}
-                    required
-                    autoComplete="username"
-                    placeholder="Email"
-                />
-
-                <InputError className="mt-2" message={errors.email} />
-            </div>
-
-            {mustVerifyEmail && auth.user.email_verified_at === null && (
-                <div>
-                    <p className="-mt-4 text-sm text-muted-foreground">
-                        Seu endereço de email não está verificado.{' '}
-                        <Link
-                            href={route('verification.send')}
-                            method="post"
-                            as="button"
-                            className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+        <>
+            {showChangeAvatarModal && <ChangeProfileModal setBackground={setShowChangeAvatarModal} />}
+            <SinglePageNoScrollLayout>
+                <form>
+                    <div className="fixed top-1/2 left-1/2 z-10 flex w-11/12 -translate-1/2 transform flex-col items-center rounded-xl bg-foreground p-12 md:flex-row">
+                        <div
+                            onClick={() => setShowChangeAvatarModal(true)}
+                            className="mb-24 aspect-square w-72 min-w-72 cursor-pointer md:mr-8 md:mb-0"
                         >
-                            Clique aqui para mandar novamente o email
-                        </Link>
-                    </p>
+                            <Avatar />
+                        </div>
+                        <div className="w-full">
+                            <div className="flex items-center">
+                                <label htmlFor="name" className="mr-2 font-[Bree_Serif] text-nowrap text-white dark:text-background">
+                                    Nome do usuario:
+                                </label>
 
-                    {status === 'verification-link-sent' && (
-                        <div className="mt-2 text-sm font-medium text-green-600">Um novo link de verificação foi enviado ao seu email.</div>
-                    )}
-                </div>
-            )}
+                                <input
+                                    id="name"
+                                    defaultValue={auth.user.name}
+                                    className="block w-full font-[Bree_Serif] text-white outline-none dark:text-background"
+                                    required
+                                    autoComplete="name"
+                                    placeholder="Nome completo"
+                                />
+                            </div>
 
-            <div className="flex items-center gap-4">
-                <Button disabled={processing}>Salvar</Button>
+                            <div className="flex items-center">
+                                <label htmlFor="email" className="mr-2 font-[Bree_Serif] text-nowrap text-white dark:text-background">
+                                    Email do usuario:
+                                </label>
 
-                <Transition
-                    show={recentlySuccessful}
-                    enter="transition ease-in-out"
-                    enterFrom="opacity-0"
-                    leave="transition ease-in-out"
-                    leaveTo="opacity-0"
-                >
-                    <p className="text-sm text-neutral-600">Salvo</p>
-                </Transition>
-            </div>
-        </form>
+                                <input
+                                    id="email"
+                                    defaultValue={auth.user.email}
+                                    type="email"
+                                    className="block w-full font-[Bree_Serif] text-white outline-none dark:text-background"
+                                    required
+                                    autoComplete="username"
+                                    placeholder="Email"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </SinglePageNoScrollLayout>
+        </>
     );
 }

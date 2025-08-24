@@ -141,7 +141,6 @@ class QuestionsSeeder extends Seeder
         DB::table('answer')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-
         $questionId = 1;
         foreach ($this->questions as $question) {
             $currentYear = $question['year'];
@@ -164,6 +163,9 @@ class QuestionsSeeder extends Seeder
                         'question_id' => $questionId,
                         'is_correct' => $answerCorrect == 'correct' ? 1 : 0,
                     ];
+                    if (!isset($answerCorrect[0])) {
+                        $answerData['is_correct'] = 1;
+                    }
 
                     DB::table('answer')->insert($answerData);
                 }

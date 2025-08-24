@@ -4,6 +4,7 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import AppLogo from './app-logo';
+import Avatar from './ui/avatar';
 import { Switch } from './ui/switch';
 
 const mainNavItems: NavItem[] = [
@@ -36,8 +37,10 @@ export function AppSidebar() {
         <div className="relative m-5 flex h-[calc(svh-1.25rem)] w-(--sidebar-width) flex-col rounded-[58px] bg-sidebar py-5 transition-[width] duration-200 ease-linear">
             <SidebarHeader>
                 <Link href="/profile" className="text-primary-foreground" prefetch>
-                    <SidebarMenu className="px-5">
-                        Mascote
+                    <SidebarMenu className="flex flex-col items-center px-5">
+                        <div className="size-36">
+                            <Avatar />
+                        </div>
                         <AppLogo />
                     </SidebarMenu>
                 </Link>

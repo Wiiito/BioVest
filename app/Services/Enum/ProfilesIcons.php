@@ -9,7 +9,7 @@ enum ProfilesIcons: string
     case Aguia = 'Aguia';
     case Arara = 'Arara';
     case Borboleta = 'Borboleta';
-    case Calopsita = 'Calipsita';
+    case Calopsita = 'Calopsita';
     case Capivara = 'Capivara';
     case Cavalo = 'Cavalo';
     case Coruja = 'Coruja';

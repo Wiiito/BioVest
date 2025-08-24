@@ -1,13 +1,10 @@
 import SinglePageNoScrollLayout from '@/components/layout/SinglePageNoScrollLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
 import Login from './login';
 import Register from './register';
 
 export default function Account() {
-    const [currentSelection, setCurrentSelection] = useState('login');
-
     return (
         <div>
             <Head title="Conta" />
