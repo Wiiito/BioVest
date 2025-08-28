@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Question\GameController;
 use App\Http\Controllers\Question\QuestionController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,12 +21,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::put('/profile/icon', [ProfileController::class, 'changeIcon'])->name('profile.icon.change');
 
-    Route::get('/game', function () {
-        return Inertia::render('game');
-    });
-
     Route::get('/category', [QuestionController::class, 'index'])->name('category.index');
     Route::get('/category/{categoryId}', [QuestionController::class, 'show'])->name('category.show');
+
+    Route::get('/game', [GameController::class, 'index'])->name('game');
+    Route::get('/category/{categoryId}/game', [GameController::class, 'answerGame'])->name('game.show');
 
     Route::get('/category/{categoryId}/questions/{year}', [QuestionController::class, 'questions'])->name('questions.index');
     Route::get('/question/{questionId}', [QuestionController::class, 'question'])->name('question.show');
