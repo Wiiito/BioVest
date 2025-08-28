@@ -2,9 +2,30 @@ import MiddleBox from '@/components/layout/MIddleBox';
 import SinglePageNoScrollLayout from '@/components/layout/SinglePageNoScrollLayout';
 import Answer from '@/types/Answer';
 import Question from '@/types/Questions';
+import Swal from 'sweetalert2';
 
 export default function AnswerQuestion({ question, answers }: { question: Question; answers: Answer[] }) {
     const imagePath = `/images/questions-images/${question.year}/${question.image_path}`;
+
+    const handleAnswer = async (answerId: number) => {
+        const response = await fetch(route('answer', answerId));
+        const json = await response.json();
+
+        if (json.isCorrect) {
+            Swal.fire({
+                title: 'Parabéns!',
+                text: 'Você acertou!',
+                icon: 'success',
+            });
+        } else {
+            Swal.fire({
+                title: 'Que pena!',
+                text: 'Você errou! Tente Novamente.',
+                icon: 'error',
+                confirmButtonText: 'Tentar Novamente!',
+            });
+        }
+    };
 
     return (
         <SinglePageNoScrollLayout>
@@ -24,7 +45,13 @@ export default function AnswerQuestion({ question, answers }: { question: Questi
                         {answers.map((answer, index) => {
                             const letter = String.fromCharCode(index + 97);
                             return (
-                                <div className="mt-2 flex cursor-pointer items-center rounded-xl p-1 font-[Bree_Serif] hover:bg-gray-200">
+                                <div
+                                    key={'answer-index-' + index}
+                                    className="mt-2 flex cursor-pointer items-center rounded-xl p-1 font-[Bree_Serif] hover:bg-gray-200"
+                                    onClick={() => {
+                                        handleAnswer(answer.id);
+                                    }}
+                                >
                                     <div className="mr-2 flex size-10 items-center justify-center rounded-lg bg-foreground">
                                         <div className="flex size-8 items-center justify-center rounded-md bg-white uppercase">{letter}</div>
                                     </div>

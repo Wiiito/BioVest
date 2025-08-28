@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Question;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionCategory;
 use Inertia\Inertia;
@@ -44,5 +45,14 @@ class QuestionController extends Controller
             'question' => $question,
             'answers' => $answers,
         ]);
+    }
+
+    public function answerQuestion($answerId)
+    {
+        $answer = Answer::find($answerId);
+        $isCorrect = $answer->is_correct;
+        return [
+            'isCorrect' => $isCorrect,
+        ];
     }
 }

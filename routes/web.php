@@ -30,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/category/{categoryId}/questions/{year}', [QuestionController::class, 'questions'])->name('questions.index');
     Route::get('/question/{questionId}', [QuestionController::class, 'question'])->name('question.show');
 
+    Route::get('/answer/{awnserId}', [QuestionController::class, 'answerQuestion'])->name('answer');
+
     Route::get('/chatbot', function () {
         return Inertia::render('chatbot');
     });
