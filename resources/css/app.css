@@ -177,3 +177,7 @@
     border-radius: 9999px;
     cursor: pointer;
 }
+
+.background-scroll::-webkit-scrollbar-thumb {
+    background: var(--background);
+}

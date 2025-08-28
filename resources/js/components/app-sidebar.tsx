@@ -15,7 +15,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'ENEM',
-        href: '/questions',
+        href: '/category',
         icon: 'book',
     },
     {

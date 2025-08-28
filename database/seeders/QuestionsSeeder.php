@@ -137,8 +137,8 @@ class QuestionsSeeder extends Seeder
     public function run(): void
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('question')->truncate();
-        DB::table('answer')->truncate();
+        DB::table('questions')->truncate();
+        DB::table('answers')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $questionId = 1;
@@ -153,7 +153,7 @@ class QuestionsSeeder extends Seeder
                 if (isset($actualQuestion['image_path'])) {
                     $data['image_path'] = $actualQuestion['image_path'];
                 }
-                DB::table('question')->insert($data);
+                DB::table('questions')->insert($data);
 
                 $answers = $actualQuestion['answers'];
                 foreach ($answers as $answerCorrect) {
@@ -167,7 +167,7 @@ class QuestionsSeeder extends Seeder
                         $answerData['is_correct'] = 1;
                     }
 
-                    DB::table('answer')->insert($answerData);
+                    DB::table('answers')->insert($answerData);
                 }
 
                 $questionId++;

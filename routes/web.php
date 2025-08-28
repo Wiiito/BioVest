@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Question\QuestionController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,9 +24,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('game');
     });
 
-    Route::get('/questions', function () {
-        return Inertia::render('questions');
-    });
+    Route::get('/category', [QuestionController::class, 'index'])->name('category.index');
+    Route::get('/category/{categoryId}', [QuestionController::class, 'show'])->name('category.show');
+
+    Route::get('/category/{categoryId}/questions/{year}', [QuestionController::class, 'questions'])->name('questions.index');
+    Route::get('/question/{questionId}', [QuestionController::class, 'question'])->name('question.show');
 
     Route::get('/chatbot', function () {
         return Inertia::render('chatbot');
