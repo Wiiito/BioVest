@@ -3,6 +3,7 @@
 use App\Http\Controllers\Question\GameController;
 use App\Http\Controllers\Question\QuestionController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,7 +15,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
+        return Inertia::render('dashboard', [
+            'leaderboard' => User::orderBy('points')->get(),
+        ]);
     })->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit']);
@@ -36,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/chatbot', function () {
         return Inertia::render('chatbot');
     });
+
+    Route::get('/leaderboard', [GameController::class, 'leaderboard'])->name('leaderboard');
 });
 
 require __DIR__ . '/settings.php';

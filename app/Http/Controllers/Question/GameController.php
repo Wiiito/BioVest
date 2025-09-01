@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -25,6 +26,7 @@ class GameController extends Controller
             'question' => $question,
             'answers' => $question->answers,
             'categories' => QuestionCategory::all(),
+            'leaders' => User::orderByDesc('points')->get(),
         ]);
     }
 
