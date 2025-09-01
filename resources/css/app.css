@@ -181,3 +181,16 @@
 .background-scroll::-webkit-scrollbar-thumb {
     background: var(--background);
 }
+
+.timer {
+    animation: 30s linear shirink;
+}
+
+@keyframes shirink {
+    100% {
+        width: 0%;
+    }
+    0% {
+        width: 100%;
+    }
+}

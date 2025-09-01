@@ -15,11 +15,7 @@ export default function Avatar() {
     }
 
     return (
-        <div
-            className={
-                'h-full w-full overflow-hidden rounded-full border-8 border-white dark:border-background' + (auth.user.profile_icon ?? ' p-12')
-            }
-        >
+        <div className={'overflow-hidden rounded-full border-8 border-white dark:border-background' + (auth.user.profile_icon ?? ' p-12')}>
             <img src={imagePath} alt="profile-icon" className="size-full" />
         </div>
     );

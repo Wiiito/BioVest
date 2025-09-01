@@ -26,6 +26,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/game', [GameController::class, 'index'])->name('game');
     Route::get('/category/{categoryId}/game', [GameController::class, 'answerGame'])->name('game.show');
+    Route::post('/game/answer/{answerId}/{points}', [GameController::class, 'answer'])->name('game.answer');
 
     Route::get('/category/{categoryId}/questions/{year}', [QuestionController::class, 'questions'])->name('questions.index');
     Route::get('/question/{questionId}', [QuestionController::class, 'question'])->name('question.show');

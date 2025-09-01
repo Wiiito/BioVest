@@ -36,6 +36,7 @@ export interface User {
     email: string;
     profile_icon?: string;
     email_verified_at: string | null;
+    points: number;
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...

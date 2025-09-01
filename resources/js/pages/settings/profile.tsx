@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import SinglePageNoScrollLayout from '@/components/layout/SinglePageNoScrollLayout';
 import Avatar from '@/components/ui/avatar';
+import HomeButton from '@/components/ui/homeButton';
 import ChangeProfileModal from './changeProfile';
 
 export default function Profile({ accountIcons }: { accountIcons: string[] }) {
@@ -15,6 +16,7 @@ export default function Profile({ accountIcons }: { accountIcons: string[] }) {
         <>
             {showChangeAvatarModal && <ChangeProfileModal setBackground={setShowChangeAvatarModal} />}
             <SinglePageNoScrollLayout>
+                <HomeButton />
                 <form>
                     <div className="fixed top-1/2 left-1/2 z-10 flex w-11/12 -translate-1/2 transform flex-col items-center rounded-xl bg-foreground p-12 md:flex-row">
                         <div

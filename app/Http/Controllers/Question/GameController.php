@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\QuestionCategory;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class GameController extends Controller
@@ -19,6 +20,24 @@ class GameController extends Controller
 
     public function answerGame($categoryId)
     {
-        return Inertia::render('gameScreen', []);
+        $question = Question::where('category_id', $categoryId)->inRandomOrder()->first();
+        return Inertia::render('gameScreen', [
+            'question' => $question,
+            'answers' => $question->answers,
+            'categories' => QuestionCategory::all(),
+        ]);
+    }
+
+    public function answer($answerId, $points = 50)
+    {
+        $answer = Answer::find($answerId);
+        $isCorrect = $answer->is_correct;
+        if ($isCorrect) {
+            $account = auth()->user();
+            $account->increment('points', $points);
+        }
+        return [
+            'isCorrect' => $isCorrect,
+        ];
     }
 }
